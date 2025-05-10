@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Battle Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .team-container {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .team {
+      flex: 1 1 50%;
+      box-sizing: border-box;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .red-team {
+      background-color: #ffdddd;
+    }
+
+    .blue-team {
+      background-color: #ddddff;
+    }
+
+    .player-card {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px;
+      width: 80%;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .player-card h3 {
+      margin: 0 0 5px;
+    }
+
+    .player-card p {
+      margin: 5px 0;
+    }
+
+    .items {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .team {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<header style="display: flex;flex-direction: column;">
+  <div>
+    <h1>🌌 League Dashboard</h1>
+  </div>
+  <nav>
+    <a href="../index.html">🏠 Home</a>
+    <a href="#">🧑 Players</a>
+    <a href="#">🛡️ Champions</a>
+    <a href="#">🎮 Games</a>
+    <a href="#">📚 News</a>
+    <a href="#">⚙️ Settings</a>
+  </nav>
+</header>
+
+<body>
+  <div class="team-container">
+    <div class="team red-team">
+      <h2>Red Team</h2>
+      <div class="player-card">
+        <h3>Name: Player 1</h3>
+        <p>Champion: Warrior</p>
+        <p>Score: 10</p>
+        <ul class="items">
+          <li>Sword</li>
+          <li>Shield</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player 2</h3>
+        <p>Champion: Archer</p>
+        <p>Score: 8</p>
+        <ul class="items">
+          <li>Bow</li>
+          <li>Quiver</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player 3</h3>
+        <p>Champion: Knight</p>
+        <p>Score: 12</p>
+        <ul class="items">
+          <li>Lance</li>
+          <li>Helmet</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player 4</h3>
+        <p>Champion: Rogue</p>
+        <p>Score: 9</p>
+        <ul class="items">
+          <li>Dagger</li>
+          <li>Cloak</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player 5</h3>
+        <p>Champion: Paladin</p>
+        <p>Score: 11</p>
+        <ul class="items">
+          <li>Hammer</li>
+          <li>Amulet</li>
+        </ul>
+      </div>
+    </div>
+    <div class="team blue-team">
+      <h2>Blue Team</h2>
+      <div class="player-card">
+        <h3>Name: Player A</h3>
+        <p>Champion: Mage</p>
+        <p>Score: 15</p>
+        <ul class="items">
+          <li>Staff</li>
+          <li>Spellbook</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player B</h3>
+        <p>Champion: Sorcerer</p>
+        <p>Score: 13</p>
+        <ul class="items">
+          <li>Orb</li>
+          <li>Wand</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player C</h3>
+        <p>Champion: Monk</p>
+        <p>Score: 10</p>
+        <ul class="items">
+          <li>Beads</li>
+          <li>Sash</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player D</h3>
+        <p>Champion: Druid</p>
+        <p>Score: 9</p>
+        <ul class="items">
+          <li>Totem</li>
+          <li>Herbs</li>
+        </ul>
+      </div>
+      <div class="player-card">
+        <h3>Name: Player E</h3>
+        <p>Champion: Illusionist</p>
+        <p>Score: 14</p>
+        <ul class="items">
+          <li>Mirror</li>
+          <li>Cape</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

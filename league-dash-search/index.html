@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoL Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0e0e1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #7cc6fe;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 10px 0 0 10px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            background-color: #7cc6fe;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background: #1c1c2e;
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            color: #8fd3ff;
+        }
+
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list li {
+            background: #2b2b44;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .list img {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .kda {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>League of Legends Dashboard</h1>
+
+    <!-- 🔍 Search -->
+    <div class="search-container">
+        <input type="text" id="summonerInput" placeholder="Enter Summoner Name..." />
+        <button onclick="searchSummoner()">Search</button>
+    </div>
+
+    <!-- 🧩 Dashboard Cards -->
+    <div class="dashboard">
+
+        <!-- Summoner Info -->
+        <div class="card" id="summoner-card">
+            <h2>Summoner</h2>
+            <p><strong>Name:</strong> Faker</p>
+            <p><strong>Level:</strong> 327</p>
+            <p><strong>Rank:</strong> Challenger</p>
+            <p><strong>LP:</strong> 1050 LP</p>
+        </div>
+
+        <!-- Items -->
+        <div class="card">
+            <h2>Items</h2>
+            <ul class="list">
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/3031.png" alt="Item"> Infinity
+                    Edge</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/6672.png" alt="Item"> Kraken
+                    Slayer</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/3153.png" alt="Item"> Blade of the
+                    Ruined King</li>
+            </ul>
+        </div>
+
+        <!-- Champions -->
+        <div class="card">
+            <h2>Champions</h2>
+            <ul class="list">
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Zed.png" alt="Zed"> Zed</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Ahri.png" alt="Ahri"> Ahri
+                </li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Yasuo.png" alt="Yasuo"> Yasuo
+                </li>
+            </ul>
+        </div>
+
+        <!-- Matches -->
+        <div class="card">
+            <h2>Recent Games</h2>
+            <ul class="list">
+                <li>Champion: Zed — <span class="kda">10/2/5</span> — <span style="color: lime;">Win</span></li>
+                <li>Champion: Ahri — <span class="kda">3/5/8</span> — <span style="color: red;">Loss</span></li>
+                <li>Champion: Yasuo — <span class="kda">7/3/4</span> — <span style="color: lime;">Win</span></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        function searchSummoner() {
+            const name = document.getElementById("summonerInput").value;
+            if (name.trim()) {
+                alert("Searching for: " + name);
+                // You'd fetch and replace card content here using Riot API
+            }
+        }
+    </script>
+
+</body>
+
+</html>

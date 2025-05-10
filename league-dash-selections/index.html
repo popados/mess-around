@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>League Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0f0f1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1c1c2e;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #8fd3ff;
+        }
+
+        .item-list,
+        .champion-list,
+        .match-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .item-list li,
+        .champion-list li,
+        .match-list li {
+            background: #292945;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+        }
+
+        .item-list li img,
+        .champion-list li img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>League of Legends Dashboard</h1>
+
+    <div class="dashboard">
+
+        <!-- Summoner Info -->
+        <div class="card">
+            <h2>Summoner</h2>
+            <p><strong>Name:</strong> Faker</p>
+            <p><strong>Level:</strong> 327</p>
+            <p><strong>Rank:</strong> Challenger</p>
+            <p><strong>LP:</strong> 1050 LP</p>
+        </div>
+
+        <!-- Items -->
+        <div class="card">
+            <h2>Favorite Items</h2>
+            <ul class="item-list">
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/3031.png" alt="Item"> Infinity
+                    Edge</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/6672.png" alt="Item"> Kraken
+                    Slayer</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/item/3153.png" alt="Item"> Blade of the
+                    Ruined King</li>
+            </ul>
+        </div>
+
+        <!-- Champions -->
+        <div class="card">
+            <h2>Top Champions</h2>
+            <ul class="champion-list">
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Zed.png" alt="Zed"> Zed</li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Ahri.png" alt="Ahri"> Ahri
+                </li>
+                <li><img src="https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/Yasuo.png" alt="Yasuo"> Yasuo
+                </li>
+            </ul>
+        </div>
+
+        <!-- Match History -->
+        <div class="card">
+            <h2>Recent Games</h2>
+            <ul class="match-list">
+                <li>
+                    Champion: Zed — <strong>K/D/A:</strong> 10/2/5 — <span style="color: lime;">Win</span>
+                </li>
+                <li>
+                    Champion: Ahri — <strong>K/D/A:</strong> 3/5/8 — <span style="color: red;">Loss</span>
+                </li>
+                <li>
+                    Champion: Yasuo — <strong>K/D/A:</strong> 7/3/4 — <span style="color: lime;">Win</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

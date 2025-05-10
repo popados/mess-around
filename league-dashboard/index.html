@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>league-dashboard</title>
+    <link href="./css/default.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <link href="./css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Beaufort for LOL', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: #0A0A0A;
+        color: #E0E0E0;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #111;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+    }
+
+    nav a {
+        color: #ccc;
+        text-decoration: none;
+        margin: 0 1rem;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #fff;
+    }
+
+    .container {
+        padding: 2rem;
+    }
+
+    .search-bar {
+        display: flex;
+        margin-bottom: 2rem;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        background: #1a1a1a;
+        color: white;
+    }
+
+    .search-bar button {
+        padding: 0.8rem 1rem;
+        background-color: #2b6cb0;
+        border: none;
+        color: white;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+    }
+
+    section {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #f4e060;
+    }
+
+    .champion-cards,
+    .game-cards {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: #1a1a1a;
+        padding: 1rem;
+        border-radius: 8px;
+        width: 180px;
+        text-align: center;
+        transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        background-color: #222;
+    }
+
+    .card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+    }
+
+    .news-list li {
+        margin-bottom: 0.5rem;
+    }
+
+    .account-summary {
+        background-color: #111;
+        padding: 1rem;
+        border-radius: 6px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.85rem;
+        border-top: 1px solid #333;
+        color: #888;
+    }
+</style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>🌌 League Dashboard</h1>
+        </div>
+        <nav>
+            <a href="#">🏠 Home</a>
+            <a href="#">🧑 Players</a>
+            <a href="#">🛡️ Champions</a>
+            <a href="#">🎮 Games</a>
+            <a href="#">📚 News</a>
+            <a href="#">⚙️ Settings</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search champions, games, items..." />
+            <button>🔍 Search</button>
+        </div>
+
+        <section>
+            <div class="section-title">🔥 Featured Champions</div>
+            <div class="champion-cards">
+                <a href="/html/champ.html">
+                    <div class="card">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="Ahri">
+                        <strong>Ahri</strong><br><small>Mage / Mid</small>
+                    </div>
+                </a>
+                <a href="/html/champ.html">
+                    <div class="card">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg" alt="Yasuo">
+                        <strong>Yasuo</strong><br><small>Fighter / Mid</small>
+                    </div>
+                </a>
+                <a href="/html/champ.html">
+                    <div class="card">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg" alt="Jinx">
+                        <strong>Jinx</strong><br><small>Marksman / Bot</small>
+                    </div>
+                </a>
+                <a href="/html/champ.html">
+                    <div class="card">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zed_0.jpg" alt="Zed">
+                        <strong>Zed</strong><br><small>Assassin / Mid</small>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">🎮 Live/Previous Games</div>
+            <div class="game-cards">
+                <a href="/html/game.html">
+                    <div class="card">
+                        <strong>Faker vs DoinB</strong><br>
+                        Winner: T1<br>
+                        Patch: 14.7<br>
+                        <button>▶️ Replay</button>
+                    </div>
+                </a>
+                <div class="card">
+                    <strong>Your Match History</strong><br>
+                    W: 7 / L: 3<br>
+                    Last Champ: Garen<br>
+                    <button>▶️ View</button>
+                </div>
+                <div class="card">
+                    <strong>LEC Semifinals</strong><br>
+                    G2 vs FNC<br>
+                    <button>▶️ Highlights</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">📰 News & Events</div>
+            <ul class="news-list">
+                <li>• MSI 2025 Schedule Released →</li>
+                <li>• Patch 14.7 Notes: Big jungle changes! →</li>
+                <li>• Free champion rotation this week →</li>
+            </ul>
+        </section>
+
+        <section class="account-summary">
+            <strong>👤 Account Summary</strong><br>
+            Summoner: KDA Pro | Level 235 | Rank: Diamond IV<br>
+            <a href="#" style="color: #2b6cb0;">[View Profile]</a>
+        </section>
+    </div>
+
+    <footer>
+        © 2025 Riot Games UI Clone | Built by You
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cookieparser": "^0.1.0",
+    "cors": "^2.8.5",
+    "glob": "^11.0.1",
+    "post": "^0.0.1",
+    "request": "^2.88.2",
+    "require-glob": "^4.1.0"
+  }
+}
