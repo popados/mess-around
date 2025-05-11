@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,47 +12,45 @@
       margin: 0;
       padding: 20px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
     }
-
+    select {
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
     .card {
       background: #1e1e1e;
       border-radius: 10px;
       max-width: 600px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       overflow: hidden;
     }
-
     .splash {
       width: 100%;
-      height: 100%;
+      height: auto;
     }
-
     .content {
       padding: 20px;
     }
-
     .header {
       text-align: center;
       margin-bottom: 15px;
     }
-
-    .stats,
-    .abilities {
+    .stats, .abilities {
       background: #2a2a2a;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
     }
-
     .ability {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
     }
-
     .ability img {
       width: 40px;
       height: 40px;
@@ -61,8 +58,21 @@
     }
   </style>
 </head>
-
 <body>
+  <header>
+    <h1>🛡️ Champion Details</h1>
+    <nav>
+        <a href="../index.html">🏠 Home</a>
+        <a href="./allchamps.html">🛡️ Champions</a>
+        <a href="./players.html">🧑 Players</a>
+        <a href="./game.html">🎮 Games</a>
+        <a href="./news.html">📚 News</a>
+        <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+</header>
+
+  <select id="champion-select"></select>
+
   <div class="card" id="champion-card">
     <img id="splash" class="splash" src="" alt="Champion Splash" />
     <div class="content">
@@ -76,51 +86,74 @@
   </div>
 
   <script>
-    const champId = "Ahri"; // replace or dynamically set from query string
+    const select = document.getElementById("champion-select");
 
-    fetch(`https://ddragon.leagueoflegends.com/cdn/14.9.1/data/en_US/champion/${champId}.json`)
+    fetch("https://ddragon.leagueoflegends.com/cdn/14.9.1/data/en_US/champion.json")
       .then(res => res.json())
       .then(data => {
-        const champ = data.data[champId];
-
-        document.getElementById("splash").src = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champId}_0.jpg`;
-        document.getElementById("name").textContent = champ.name;
-        document.getElementById("title").textContent = champ.title;
-
-        const stats = champ.stats;
-        const statsHTML = `
-          <h3>Stats</h3>
-          <ul>
-            <li>HP: ${stats.hp}</li>
-            <li>Attack Damage: ${stats.attackdamage}</li>
-            <li>Armor: ${stats.armor}</li>
-            <li>Magic Resist: ${stats.spellblock}</li>
-            <li>Attack Speed: ${stats.attackspeed}</li>
-            <li>Move Speed: ${stats.movespeed}</li>
-          </ul>
-        `;
-        document.getElementById("stats").innerHTML = statsHTML;
-
-        const abilitiesHTML = [`
-          <h3>Abilities</h3>
-          <div class="ability">
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/passive/${champ.passive.image.full}" alt="${champ.passive.name}">
-            <div><strong>${champ.passive.name} (Passive)</strong><br><small>${champ.passive.description}</small></div>
-          </div>
-        `];
-
-        champ.spells.forEach(spell => {
-          abilitiesHTML.push(`
-            <div class="ability">
-              <img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/${spell.image.full}" alt="${spell.name}">
-              <div><strong>${spell.name}</strong><br><small>${spell.description}</small></div>
-            </div>
-          `);
+        const champions = Object.values(data.data).sort((a, b) => a.name.localeCompare(b.name));
+        champions.forEach(champ => {
+          const option = document.createElement("option");
+          option.value = champ.id;
+          option.textContent = champ.name;
+          select.appendChild(option);
         });
 
-        document.getElementById("abilities").innerHTML = abilitiesHTML.join("");
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialChamp = urlParams.get("champ") || "Ahri";
+        select.value = initialChamp;
+        loadChampion(initialChamp);
       });
+
+    select.addEventListener("change", () => {
+      const selectedChamp = select.value;
+      window.history.replaceState(null, null, `?champ=${selectedChamp}`);
+      loadChampion(selectedChamp);
+    });
+
+    function loadChampion(champId) {
+      fetch(`https://ddragon.leagueoflegends.com/cdn/14.9.1/data/en_US/champion/${champId}.json`)
+        .then(res => res.json())
+        .then(data => {
+          const champ = data.data[champId];
+
+          document.getElementById("splash").src = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champId}_0.jpg`;
+          document.getElementById("name").textContent = champ.name;
+          document.getElementById("title").textContent = champ.title;
+
+          const stats = champ.stats;
+          document.getElementById("stats").innerHTML = `
+            <h3>Stats</h3>
+            <ul>
+              <li>HP: ${stats.hp}</li>
+              <li>Attack Damage: ${stats.attackdamage}</li>
+              <li>Armor: ${stats.armor}</li>
+              <li>Magic Resist: ${stats.spellblock}</li>
+              <li>Attack Speed: ${stats.attackspeed}</li>
+              <li>Move Speed: ${stats.movespeed}</li>
+            </ul>
+          `;
+
+          const abilitiesHTML = [`
+            <h3>Abilities</h3>
+            <div class="ability">
+              <img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/passive/${champ.passive.image.full}" alt="${champ.passive.name}">
+              <div><strong>${champ.passive.name} (Passive)</strong><br><small>${champ.passive.description}</small></div>
+            </div>
+          `];
+
+          champ.spells.forEach(spell => {
+            abilitiesHTML.push(`
+              <div class="ability">
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/spell/${spell.image.full}" alt="${spell.name}">
+                <div><strong>${spell.name}</strong><br><small>${spell.description}</small></div>
+              </div>
+            `);
+          });
+
+          document.getElementById("abilities").innerHTML = abilitiesHTML.join("");
+        });
+    }
   </script>
 </body>
-
 </html>

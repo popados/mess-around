@@ -45,6 +45,7 @@
 
         .info {
             padding: 10px;
+            gap: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -72,7 +73,7 @@
             display: none;
             /* margin: auto 0; */
             position: absolute;
-            bottom: 75px;
+            bottom: 145px;
             left: 0;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.55);
@@ -132,15 +133,16 @@
                     const card = document.createElement("div");
                     card.className = "champion-card";
                     card.innerHTML = `
-            <a href="./champ.html"><img src="${splashUrl}" class="splash" alt="${champ.name} Splash Art">
+            <a href="./champ.html?champ=${champ.id}">
+            <img src="${splashUrl}" class="splash" alt="${champ.name} Splash Art">
             <div class="info">
-              <img src="${iconUrl}" class="icon" alt="${champ.name} Icon">
+              <img src="${iconUrl}" class="sicon" alt="${champ.name} Icon">
               <div class="details">
                 <strong>${champ.name}</strong><br>
                 <small>${champ.title}</small>
               </div>
-            </div></a>
-            <div class="hover-info" id="info-${champ.id}">Loading...</div>
+            </div>
+            <div class="hover-info" id="info-${champ.id}">Loading...</div></a>
           `;
                     container.appendChild(card);
 
