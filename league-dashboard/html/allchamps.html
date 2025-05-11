@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>League of Legends Champion Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #champion-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .champion-card {
+            width: 320px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s;
+            position: relative;
+            border: 2px solid antiquewhite;
+        }
+
+        .champion-card:hover {
+            transform: scale(1.03);
+            /* align-self: center; */
+        }
+
+        .splash {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .info {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .details strong {
+            font-size: 16px;
+            color: #ffcc00;
+        }
+
+        .details small {
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        .hover-info {
+            display: none;
+            /* margin: auto 0; */
+            position: absolute;
+            bottom: 75px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.55);
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 13px;
+            color: #eee;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .champion-card:hover .hover-info {
+            display: block;
+            opacity: 1;
+        }
+
+        .hover-info ul {
+            padding-left: 15px;
+            margin: 5px 0 0 0;
+        }
+
+        .hover-info li {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<header>
+    <h1>🛡️ Champions</h1>
+    <nav>
+        <a href="../index.html">🏠 Home</a>
+        <a href="./allchamps.html">🛡️ Champions</a>
+        <a href="./players.html">🧑 Players</a>
+        <a href="./game.html">🎮 Games</a>
+        <a href="./news.html">📚 News</a>
+        <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+</header>
+
+<body>
+
+    <h1>League of Legends Champion Cards</h1>
+    <div id="champion-cards"></div>
+
+    <script>
+        fetch("https://ddragon.leagueoflegends.com/cdn/14.9.1/data/en_US/champion.json")
+            .then(res => res.json())
+            .then(data => {
+                const champions = data.data;
+                const container = document.getElementById("champion-cards");
+
+                Object.values(champions).forEach(champ => {
+                    const iconUrl = `https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${champ.image.full}`;
+                    const splashUrl = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`;
+
+                    const card = document.createElement("div");
+                    card.className = "champion-card";
+                    card.innerHTML = `
+            <a href="./champ.html"><img src="${splashUrl}" class="splash" alt="${champ.name} Splash Art">
+            <div class="info">
+              <img src="${iconUrl}" class="icon" alt="${champ.name} Icon">
+              <div class="details">
+                <strong>${champ.name}</strong><br>
+                <small>${champ.title}</small>
+              </div>
+            </div></a>
+            <div class="hover-info" id="info-${champ.id}">Loading...</div>
+          `;
+                    container.appendChild(card);
+
+                    // Fetch detailed info
+                    fetch(`https://ddragon.leagueoflegends.com/cdn/14.9.1/data/en_US/champion/${champ.id}.json`)
+                        .then(res => res.json())
+                        .then(detail => {
+                            const champData = detail.data[champ.id];
+                            const stats = champData.stats;
+                            document.getElementById(`info-${champ.id}`).innerHTML = `
+                <div><strong>${champData.name}</strong> - <small>${champData.title}</small></div>
+                <div>${champData.blurb}</div>
+                <ul>
+                  <li>HP: ${stats.hp}</li>
+                  <li>Attack Damage: ${stats.attackdamage}</li>
+                  <li>Armor: ${stats.armor}</li>
+                  <li>Magic Resist: ${stats.spellblock}</li>
+                  <li>Attack Speed: ${stats.attackspeed}</li>
+                  <li>Move Speed: ${stats.movespeed}</li>
+                </ul>
+              `;
+                        });
+                });
+            });
+    </script>
+
+</body>
+
+</html>
