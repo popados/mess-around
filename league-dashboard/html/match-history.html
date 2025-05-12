@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoL Match History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0a0a0a;
+      color: #f0f0f0;
+      padding: 20px;
+    }
+
+    .match-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .match-card h3 {
+      margin-top: 0;
+      color: #61dafb;
+    }
+
+    .players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      background-color: #2a2a2a;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+
+    .player img {
+      width: 32px;
+      height: 32px;
+      border-radius: 5px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Match History</h1>
+  <div><a href="./match-details.html">Match details</a></div>
+  <header>
+    <div>
+      <h1>🌌 League Dashboard</h1>
+    </div>
+    <nav>
+      <a href="../index.html">🏠 Home</a>
+      <a href="./allchamps.html">🛡️ Champions</a>
+      <a href="./players.html">🧑 Players</a>
+      <a href="./game.html">🎮 Games</a>
+      <a href="./match-history.html">📚 Match List</a>
+      <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+  </header>
+
+  <div id="match-history">
+    <!-- Match cards will be inserted here -->
+  </div>
+  <script>
+    // Example static match data
+    const matches = [
+      {
+        matchId: "NA1_1234567890",
+        participants: [
+          { summonerName: "Player1", championName: "Ahri" },
+          { summonerName: "Player2", championName: "Garen" },
+          { summonerName: "Player3", championName: "Lux" },
+          { summonerName: "Player4", championName: "Ezreal" },
+          { summonerName: "Player5", championName: "Jhin" },
+          { summonerName: "Player6", championName: "Zed" },
+          { summonerName: "Player7", championName: "Vi" },
+          { summonerName: "Player8", championName: "Yasuo" },
+          { summonerName: "Player9", championName: "KaiSa" },
+          { summonerName: "Player10", championName: "Thresh" },
+        ]
+      },
+      {
+        matchId: "NA1_9876543210",
+        participants: [
+          { summonerName: "Alpha", championName: "Morgana" },
+          { summonerName: "Beta", championName: "Draven" },
+          { summonerName: "Gamma", championName: "Ashe" },
+          { summonerName: "Delta", championName: "Nami" },
+          { summonerName: "Epsilon", championName: "Malphite" },
+          { summonerName: "Zeta", championName: "Fizz" },
+          { summonerName: "Eta", championName: "Orianna" },
+          { summonerName: "Theta", championName: "Rengar" },
+          { summonerName: "Iota", championName: "Shen" },
+          { summonerName: "Kappa", championName: "Xayah" },
+        ]
+      },
+      {
+        matchId: "NA1_5555555555",
+        participants: [
+          { summonerName: "Night", championName: "Katarina" },
+          { summonerName: "Moon", championName: "Vayne" },
+          { summonerName: "Star", championName: "Leona" },
+          { summonerName: "Sun", championName: "Talon" },
+          { summonerName: "Sky", championName: "Braum" },
+          { summonerName: "Wind", championName: "Akali" },
+          { summonerName: "Fire", championName: "Kennen" },
+          { summonerName: "Earth", championName: "Sion" },
+          { summonerName: "Ocean", championName: "Seraphine" },
+          { summonerName: "Storm", championName: "Tryndamere" },
+        ]
+      }
+    ];
+
+    const matchContainer = document.getElementById("match-history");
+
+    matches.forEach(match => {
+      const card = document.createElement("div");
+      card.className = "match-card";
+      card.innerHTML = `<a href="./match-details.html"><h3>Match ID: ${match.matchId}</h3><div class="players"></div></a>`;
+
+      const playersDiv = card.querySelector(".players");
+      match.participants.forEach(p => {
+        const player = document.createElement("div");
+        player.className = "player";
+        player.innerHTML = `
+          <img src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+          <span>${p.summonerName}</span>
+        `;
+        playersDiv.appendChild(player);
+      });
+
+      matchContainer.appendChild(card);
+    });
+  </script>
+
+</body>
+
+</html>

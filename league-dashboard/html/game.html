@@ -14,6 +14,28 @@
       height: 100vh;
     }
 
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+
     .team-container {
       display: flex;
       flex: 1;
@@ -69,21 +91,20 @@
   </style>
 </head>
 
-<header style="display: flex;flex-direction: column;">
-  <div>
-    <h1>🌌 League Dashboard</h1>
-  </div>
-  <nav>
-    <a href="../index.html">🏠 Home</a>
-    <a href="./allchamps.html">🛡️ Champions</a>
-    <a href="./players.html">🧑 Players</a>
-    <a href="./game.html">🎮 Games</a>
-    <a href="./news.html">📚 News</a>
-    <a href="./settings.html">⚙️ Settings</a>
-  </nav>
-</header>
-
 <body>
+  <header style="display: flex;flex-direction: column;">
+    <div>
+      <h1>🌌 League Dashboard</h1>
+    </div>
+    <nav>
+      <a href="../index.html">🏠 Home</a>
+      <a href="./allchamps.html">🛡️ Champions</a>
+      <a href="./players.html">🧑 Players</a>
+      <a href="./game.html">🎮 Games</a>
+      <a href="./match-history.html">📚 Match List</a>
+      <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+  </header>
   <div class="team-container">
     <div class="team red-team">
       <h2>Red Team</h2>

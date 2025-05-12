@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,28 @@
       flex-direction: column;
       align-items: center;
     }
+
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
     select {
       margin-bottom: 20px;
       padding: 10px;
@@ -22,35 +45,43 @@
       border-radius: 5px;
       border: none;
     }
+
     .card {
       background: #1e1e1e;
       border-radius: 10px;
       max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
+
     .splash {
       width: 100%;
       height: auto;
     }
+
     .content {
       padding: 20px;
     }
+
     .header {
       text-align: center;
       margin-bottom: 15px;
     }
-    .stats, .abilities {
+
+    .stats,
+    .abilities {
       background: #2a2a2a;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
     }
+
     .ability {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
     }
+
     .ability img {
       width: 40px;
       height: 40px;
@@ -58,18 +89,21 @@
     }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>🛡️ Champion Details</h1>
+    <div>
+      <h1>🌌 League Dashboard</h1>
+    </div>
     <nav>
-        <a href="../index.html">🏠 Home</a>
-        <a href="./allchamps.html">🛡️ Champions</a>
-        <a href="./players.html">🧑 Players</a>
-        <a href="./game.html">🎮 Games</a>
-        <a href="./news.html">📚 News</a>
-        <a href="./settings.html">⚙️ Settings</a>
+      <a href="../index.html">🏠 Home</a>
+      <a href="./allchamps.html">🛡️ Champions</a>
+      <a href="./players.html">🧑 Players</a>
+      <a href="./game.html">🎮 Games</a>
+      <a href="./match-history.html">📚 Match List</a>
+      <a href="./settings.html">⚙️ Settings</a>
     </nav>
-</header>
+  </header>
 
   <select id="champion-select"></select>
 
@@ -156,4 +190,5 @@
     }
   </script>
 </body>
+
 </html>
