@@ -81,8 +81,9 @@
 
     .carousel-container {
       /* display: flex; */
+      /* top: 25px; */
       position: relative;
-      overflow: hidden;
+      /* overflow: hidden; */
       width: 100%;
     }
 
@@ -91,9 +92,10 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      overflow-x: auto;
+      /* overflow-x: auto; */
       scroll-behavior: smooth;
       padding-bottom: 1rem;
+      /* height: 400px; */
     }
 
     .carousel-item {
@@ -106,6 +108,7 @@
       transition: transform 0.3s ease;
       text-decoration: none;
       color: inherit;
+      border: 2px solid #fefefe;
     }
 
     .carousel-item:hover {
@@ -142,9 +145,67 @@
     }
 
     .game-cards {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
-      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .game-cards .card {
+      background: #1a1a1a;
+      border-left: 4px solid #2b6cb0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      width: 250px;
+    }
+
+    .game-cards .card:hover {
+      transform: scale(1.15);
+      border-left-color: #f4e060;
+      background-color: #222;
+    }
+
+    .game-cards .card strong {
+      font-size: 1.1rem;
+      color: #f4e060;
+      margin-bottom: 0.5rem;
+    }
+
+    .game-cards .card p {
+      font-size: 0.9rem;
+      margin: 0.3rem 0;
+      color: #ccc;
+    }
+
+    .game-cards .highlight {
+      color: #f4e060;
+      font-weight: bold;
+    }
+
+    .game-cards .card button {
+      align-self: start;
+      margin-top: 0.8rem;
+      background-color: #2b6cb0;
+      color: white;
+      padding: 0.4rem 0.7rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .game-cards .card button:hover {
+      background-color: #3b82f6;
     }
 
     .card {
@@ -223,27 +284,52 @@
     <section>
       <div class="section-title">🎮 Live/Previous Games</div>
       <div class="game-cards">
-        <a href="/html/game.html">
-          <div class="card">
-            <strong>Faker vs DoinB</strong><br>
-            Winner: T1<br>
-            Patch: 14.7<br>
-            <button>▶️ Replay</button>
-          </div>
-        </a>
         <div class="card">
-          <strong>Your Match History</strong><br>
-          W: 7 / L: 3<br>
-          Last Champ: Garen<br>
-          <button>▶️ View</button>
+          <strong>Faker vs DoinB</strong>
+          <p>🏆 Winner: <span class="highlight">Faker</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 32:18</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
         </div>
         <div class="card">
-          <strong>LEC Semifinals</strong><br>
-          G2 vs FNC<br>
-          <button>▶️ Highlights</button>
+          <strong>Caps vs Knight</strong>
+          <p>🏆 Winner: <span class="highlight">Knight</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 28:45</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
+        </div>
+        <div class="card">
+          <strong>ShowMaker vs Scout</strong>
+          <p>🏆 Winner: <span class="highlight">ShowMaker</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 30:02</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
+        </div>
+        <div class="card">
+          <strong>Chovy vs Bdd</strong>
+          <p>🏆 Winner: <span class="highlight">Chovy</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 34:11</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
+        </div>
+        <div class="card">
+          <strong>Perkz vs Humanoid</strong>
+          <p>🏆 Winner: <span class="highlight">Humanoid</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 29:37</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
+        </div>
+        <div class="card">
+          <strong>Jojopyun vs Evi</strong>
+          <p>🏆 Winner: <span class="highlight">Jojopyun</span></p>
+          <p>🛠️ Patch: 14.7</p>
+          <p>⏱️ Duration: 27:50</p>
+          <button><i class="bi bi-play-circle"></i> Replay</button>
         </div>
       </div>
     </section>
+
+
 
     <section>
       <div class="section-title">📰 News & Events</div>
