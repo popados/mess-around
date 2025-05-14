@@ -215,10 +215,76 @@
       width: 180px;
       text-align: center;
       transition: transform 0.2s ease;
+      color: #bdbdbd;
+      border: 2px solid antiquewhite;
+    }
+
+
+    .champion-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .champion-cards .card {
+      background: linear-gradient(145deg, #161616, #1e1e1e);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .champion-cards .card:hover {
+      transform: scale(1.28);
+      background-color: #252525;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      border-color: #f4e060;
+    }
+
+
+    /* .champion-cards .card {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 12px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      border: 2px solid transparent;
+    }
+
+    .champion-cards .card:hover {
+      transform: scale(1.08);
+      background-color: #222;
+      border-color: #2b6cb0;
+      box-shadow: 0 0 20px rgba(43, 108, 176, 0.5);
+    } */
+
+    .champion-cards .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .champion-cards .card strong {
+      font-size: 1.1rem;
+      color: #f4e060;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .champion-cards .card small {
+      font-size: 0.85rem;
+      color: #ccc;
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.25);
       background-color: #222;
     }
 
@@ -372,7 +438,7 @@
 
       randomChamps.forEach(champ => {
         const champHTML = `
-          <a href="/html/champ.html?champ=${champ.id}" class="carousel-item">
+          <a href="/html/champ.html?champ=${champ.id}" class="carousel-item; champion-cards; card">
             <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg" alt="${champ.name}">
             <strong>${champ.name}</strong><br><small>${champ.tags.join(' / ')}</small>
           </a>`;
