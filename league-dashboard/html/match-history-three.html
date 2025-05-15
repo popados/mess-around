@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoL Match History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .profile-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+    }
+
+    .top-champions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .champion-icon-small {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+
+    .match-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .match-id {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00b4d8;
+    }
+
+    .players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #2c2c2c;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .champion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Match History</h1>
+
+
+  <div>
+    <input type="text" id="summonerInput" placeholder="Enter Summoner Name" />
+    <button onclick="loadMatchHistory()">Load Match History</button>
+    <div id="match-history"></div>
+  </div>
+
+
+  <div class="profile-card">
+    <img class="profile-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/profileicon/29.png"
+      alt="Profile Icon">
+    <div>
+      <div><strong>Summoner Name:</strong> MockSummoner</div>
+      <div><strong>Title:</strong> The Prodigy</div>
+      <div><strong>Level:</strong> 214</div>
+      <div><strong>Top Champions:</strong>
+        <div class="top-champions">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png"
+            alt="Yasuo">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Zed.png"
+            alt="Zed">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png"
+            alt="Lux">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="match-history-container"></div>
+
+  <script>
+    const mockMatchHistory = [
+      {
+        metadata: { matchId: "NA1_1234567890" },
+        info: {
+          participants: [
+            { summonerName: "Player1", championName: "Ahri", teamId: 100, win: true },
+            { summonerName: "Player2", championName: "Yasuo", teamId: 100, win: true },
+            { summonerName: "Player3", championName: "Lux", teamId: 100, win: true },
+            { summonerName: "Player4", championName: "Jinx", teamId: 100, win: true },
+            { summonerName: "Player5", championName: "Ezreal", teamId: 100, win: true },
+            { summonerName: "Player6", championName: "Garen", teamId: 200, win: false },
+            { summonerName: "Player7", championName: "Morgana", teamId: 200, win: false },
+            { summonerName: "Player8", championName: "Zed", teamId: 200, win: false },
+            { summonerName: "Player9", championName: "Thresh", teamId: 200, win: false },
+            { summonerName: "Player10", championName: "Annie", teamId: 200, win: false }
+          ]
+        }
+      },
+      {
+        metadata: { matchId: "NA1_1234567891" },
+        info: {
+          participants: [
+            { summonerName: "SummonerA", championName: "Vi", teamId: 100, win: false },
+            { summonerName: "SummonerB", championName: "Caitlyn", teamId: 100, win: false },
+            { summonerName: "SummonerC", championName: "Blitzcrank", teamId: 100, win: false },
+            { summonerName: "SummonerD", championName: "Teemo", teamId: 100, win: false },
+            { summonerName: "SummonerE", championName: "Sona", teamId: 100, win: false },
+            { summonerName: "SummonerF", championName: "Darius", teamId: 200, win: true },
+            { summonerName: "SummonerG", championName: "Leona", teamId: 200, win: true },
+            { summonerName: "SummonerH", championName: "Twitch", teamId: 200, win: true },
+            { summonerName: "SummonerI", championName: "Shaco", teamId: 200, win: true },
+            { summonerName: "SummonerJ", championName: "Nami", teamId: 200, win: true }
+          ]
+        }
+      }
+    ];
+
+    async function loadMatchHistoryForSummoner(name) {
+      try {
+        const summonerRes = await fetch(`http://localhost:3000/api/summoner/${name}`);
+        const summonerData = await summonerRes.json();
+
+        const matchRes = await fetch(`http://localhost:3000/api/matches/${summonerData.puuid}`);
+        const matchHistory = await matchRes.json();
+
+        const container = document.getElementById('match-history-container');
+        container.innerHTML = matchHistory.map(createMatchCard).join('');
+      } catch (err) {
+        console.error('Error loading match history:', err);
+      }
+    }
+
+
+    function loadMatchHistory() {
+      const name = document.getElementById('summonerInput').value;
+      if (name) loadMatchHistoryForSummoner(name);
+    }
+
+    function createMatchCard(match) {
+      const team100 = match.info.participants.filter(p => p.teamId === 100);
+      const team200 = match.info.participants.filter(p => p.teamId === 200);
+      const team100Won = team100[0].win;
+
+      return `
+        <div class="match-card">
+          <div class="match-id">${match.metadata.matchId}</div>
+          <div style="margin-bottom: 10px; color: ${team100Won ? '#4caf50' : '#f44336'}">
+            Winner: Team ${team100Won ? 'Blue (100)' : 'Red (200)'}
+          </div>
+          <div style="width: 100%;">
+            <strong style="color: #4fc3f7">Team 100</strong>
+            <div class="players">
+              ${team100.map(p => `
+                <div class="player">
+                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+                  <span>${p.summonerName}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div style="width: 100%; margin-top: 10px;">
+            <strong style="color: #e57373">Team 200</strong>
+            <div class="players">
+              ${team200.map(p => `
+                <div class="player">
+                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+                  <span>${p.summonerName}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    const container = document.getElementById('match-history-container');
+    container.innerHTML = mockMatchHistory.map(createMatchCard).join('');
+  </script>
+</body>
+
+</html>

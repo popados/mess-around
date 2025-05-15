@@ -13,6 +13,7 @@
       padding: 20px;
     }
 
+
     header {
       background-color: #111;
       padding: 1rem 2rem;
@@ -34,12 +35,42 @@
     }
 
 
-    .match-card {
+    .profile-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+    }
+
+    .top-champions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .champion-icon-small {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+
+    .player-card {
       background: #1e1e1e;
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      /* width: 20%; */
     }
 
     .match-id {
@@ -56,11 +87,13 @@
 
     .player {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      /* align-items: center; */
       gap: 8px;
       background: #2c2c2c;
       padding: 5px 10px;
       border-radius: 5px;
+      /* width: 20%; */
     }
 
     .champion-icon {
@@ -72,11 +105,10 @@
 </head>
 
 <body>
-
   <h1>Match History</h1>
 
-  <div><a href="./match-details.html">Match details</a></div>
   <header>
+
     <div>
       <h1>🌌 League Dashboard</h1>
     </div>
@@ -90,79 +122,185 @@
     </nav>
   </header>
 
+
   <div>
     <input type="text" id="summonerInput" placeholder="Enter Summoner Name" />
-    <button onclick="loadMatchHistory()">Load Match History</button>
+    <input type="text" id="summonerTag" placeholder="Enter Tag" />
+    <button onclick="loadPlayerProfile()">Load Match History</button>
     <div id="match-history"></div>
   </div>
 
-  <!-- Example Match Card -->
-  <div class="match-card">
-    <div class="match-id">Match ID: NA1_1234567890</div>
-    <div class="players">
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Ahri.png"
-          alt="Ahri">
-        <span>Summoner1</span>
-      </div>
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png"
-          alt="Yasuo">
-        <span>Summoner2</span>
-      </div>
-    </div>
+  <div><a href="./match-details.html">Match details</a></div>
+
+  <div class="profile-card" id="profile-card"></div>
+
+  <div id="match-history-container" style="display: flex; flex-direction:column;">
+    <!-- <div id="match-data-container"></div> -->
+    <div id="player-card-container"></div>
   </div>
 
-  <!-- Additional Match Cards -->
-  <a href="./match-details.html">
-    <div class="match-card">
-      <div class="match-id">Match ID: NA1_1234567891</div>
-      <div class="players">
-        <div class="player">
-          <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Jinx.png"
-            alt="Jinx">
-          <span>Summoner3</span>
+  <script>
+
+    async function loadPlayerProfile() {
+      const name = document.getElementById('summonerInput').value;
+      const tag = document.getElementById('summonerTag').value
+      if (name && tag) {
+        let puuid = await loadSummonerPuuid(name, tag);
+        loadSummonerProfile(puuid.gameName, puuid.puuid);
+        let matches = await loadMatchHistory(puuid.puuid, name);
+        let matchData = await loadMatchData(name, matches[0])
+        // console.log(matches)
+        console.log(matchData)
+        return puuid.puuid;
+      }
+    }
+
+    // function summonerProfile(puuid) {
+    //   loadSummonerPuuid(puuid)
+    // }
+
+    async function loadMatchData(name, match) {
+      const response = await fetch(`http://localhost:3000/api/summoner/matches/match/${match}/${name}`);
+      const data = await response.json();
+      console.log(data)
+      // const container = document.getElementById('match-history');
+      for (i = 0; i < data.info.participants.length; i++) {
+        const container = document.getElementById('player-card-container')
+        container.innerHTML +=
+          `<div class="player-card" style="display:flex; flex-direction:column;">
+        <p class="player">Riot Name: ${data.info.participants[i].riotIdGameName}#${data.info.participants[i].riotIdTagline}</p>
+        <p>Champion: ${data.info.participants[i].championName}</p>
+        <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${data.info.participants[i].championName}.png" alt="Champ-Icon">
+        </div>`
+      }
+      return data;
+    }
+
+    async function loadSummonerPuuid(summonerName, tag) {
+      const response = await fetch(`http://localhost:3000/api/summoner/${summonerName}/${tag}`);
+      const data = await response.json();
+      return data;
+    }
+
+    async function loadSummonerProfile(summName, puuid) {
+
+      // const name = document.getElementById('summonerInput').value;
+      // const tag = document.getElementById('summonerTag').value
+      const response = await fetch(`http://localhost:3000/api/summoner/${puuid}`)
+      const data = await response.json();
+      console.log(data)
+      // loadSummonerPuuid(name, tag)
+      const profileHTML = `
+        // <img class="profile-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/profileicon/${data.profileIconId}.png" alt="Profile Icon">
+        <div>
+          <div><strong>Summoner Name:</strong> ${summName.toUpperCase()}</div>
+          <div><strong>Title:</strong> The Prodigy</div>
+          <div><strong>Level:</strong> ${data.summonerLevel}</div>
+          <div><strong>Top Champions:</strong>
+            <div class="top-champions">
+              <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png" alt="Yasuo">
+              <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Zed.png" alt="Zed">
+              <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png" alt="Lux">
+            </div>
+          </div>
         </div>
-        <div class="player">
-          <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Garen.png"
-            alt="Garen">
-          <span>Summoner4</span>
+      `;
+      document.getElementById('profile-card').innerHTML = profileHTML;
+    }
+
+
+    async function loadMatchHistory(puuid, name) {
+      // let puuid = loadPlayerProfile();
+
+
+      // const mockMatchHistory = [
+      //   {
+      //     metadata: { matchId: "NA1_1234567890" },
+      //     info: {
+      //       participants: [
+      //         { summonerName: "Player1", championName: "Ahri", teamId: 100, win: true },
+      //         { summonerName: "Player2", championName: "Yasuo", teamId: 100, win: true },
+      //         { summonerName: "Player3", championName: "Lux", teamId: 100, win: true },
+      //         { summonerName: "Player4", championName: "Jinx", teamId: 100, win: true },
+      //         { summonerName: "Player5", championName: "Ezreal", teamId: 100, win: true },
+      //         { summonerName: "Player6", championName: "Garen", teamId: 200, win: false },
+      //         { summonerName: "Player7", championName: "Morgana", teamId: 200, win: false },
+      //         { summonerName: "Player8", championName: "Zed", teamId: 200, win: false },
+      //         { summonerName: "Player9", championName: "Thresh", teamId: 200, win: false },
+      //         { summonerName: "Player10", championName: "Annie", teamId: 200, win: false }
+      //       ]
+      //     }
+      //   }
+      // ];
+      const response = await fetch(`http://localhost:3000/api/summoner/matches/${puuid}/${name}`)
+      const data = await response.json();
+      console.log(data)
+
+      // container document.getElementById('match-history-container').data.map(createMatchList).join('');
+
+      for (i = 0; i < data.length; i++) {
+
+        //   const profileHTML = `
+        //     <div>
+        //       <p>Match: ${data[i]}</p>
+        //     </div>
+
+        //   `;
+        const container = document.getElementById('match-history-container');
+        const match_card = document.getElementById('player-card-container')
+        container.innerHTML += `<div id="player-card-container" style="display:block;border: 1px solid antiquewhite;padding:24px; gap: 16px"></div>`
+        match_card.innerHTML += `<p>MatchL:</p>`
+
+      }
+
+      // return container
+
+      // container.innerHTML = data.map(createMatchList).join('');
+      return data
+    }
+
+    function createMatchList(data) {
+
+    }
+
+    function createMatchCard(match) {
+      const team100 = match.info.participants.filter(p => p.teamId === 100);
+      const team200 = match.info.participants.filter(p => p.teamId === 200);
+      const team100Won = team100[0].win;
+
+      return `
+        <div class="match-card">
+          <div class="match-id">${match.metadata.matchId}</div>
+          <div style="margin-bottom: 10px; color: ${team100Won ? '#4caf50' : '#f44336'}">
+            Winner: Team ${team100Won ? 'Blue (100)' : 'Red (200)'}
+          </div>
+          <div style="width: 100%;">
+            <strong style="color: #4fc3f7">Team 100</strong>
+            <div class="players">
+              ${team100.map(p => `
+                <div class="player">
+                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+                  <span>${p.summonerName}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div style="width: 100%; margin-top: 10px;">
+            <strong style="color: #e57373">Team 200</strong>
+            <div class="players">
+              ${team200.map(p => `
+                <div class="player">
+                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+                  <span>${p.summonerName}</span>
+                </div>`).join('')}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </a>
+      `;
+    }
 
-  <div class="match-card">
-    <div class="match-id">Match ID: NA1_1234567892</div>
-    <div class="players">
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png" alt="Lux">
-        <span>Summoner5</span>
-      </div>
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Thresh.png"
-          alt="Thresh">
-        <span>Summoner6</span>
-      </div>
-    </div>
+    loadSummonerProfile("MockSummoner");
+    // loadMatchHistory();
+    loadPlayerProfile()
+  </script>
+  iv>
   </div>
-
-  <div class="match-card">
-    <div class="match-id">Match ID: NA1_1234567893</div>
-    <div class="players">
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Ezreal.png"
-          alt="Ezreal">
-        <span>Summoner7</span>
-      </div>
-      <div class="player">
-        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Morgana.png"
-          alt="Morgana">
-        <span>Summoner8</span>
-      </div>
-    </div>
-  </div>
-
-</body>
-
-</html>

@@ -429,6 +429,8 @@
       return array;
     }
 
+
+
     async function loadFeaturedChampions() {
       const res = await fetch(DDRAGON_URL);
       const data = await res.json();
@@ -438,7 +440,7 @@
 
       randomChamps.forEach(champ => {
         const champHTML = `
-          <a href="/html/champ.html?champ=${champ.id}" class="carousel-item; champion-cards; card">
+          <a href="/html/champ.html?champ=${champ.id}" class="cael-item; champion-cards; card">
             <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg" alt="${champ.name}">
             <strong>${champ.name}</strong><br><small>${champ.tags.join(' / ')}</small>
           </a>`;

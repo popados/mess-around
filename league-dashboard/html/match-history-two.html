@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoL Match History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .profile-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+    }
+
+
+    .top-champions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .champion-icon-small {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+
+    .match-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .match-id {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00b4d8;
+    }
+
+    .players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #2c2c2c;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .champion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Match History</h1>
+
+  <div><a href="./match-details.html">Match details</a></div>
+  <header>
+    <div>
+      <h1>🌌 League Dashboard</h1>
+    </div>
+    <nav>
+      <a href="../index.html">🏠 Home</a>
+      <a href="./allchamps.html">🛡️ Champions</a>
+      <a href="./players.html">🧑 Players</a>
+      <a href="./game.html">🎮 Games</a>
+      <a href="./match-history.html">📚 Match List</a>
+      <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+  </header>
+
+
+  <div class="profile-card">
+    <img class="profile-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/profileicon/29.png"
+      alt="Profile Icon">
+    <div>
+      <div><strong>Summoner Name:</strong> MockSummoner</div>
+      <div><strong>Title:</strong> The Prodigy</div>
+      <div><strong>Level:</strong> 214</div>
+      <div><strong>Top Champions:</strong>
+        <div class="top-champions">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png"
+            alt="Yasuo">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Zed.png"
+            alt="Zed">
+          <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png"
+            alt="Lux">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <input type="text" id="summonerInput" placeholder="Enter Summoner Name" />
+    <button onclick="loadMatchHistory()">Load Match History</button>
+    <div id="match-history"></div>
+  </div>
+
+  <!-- Example Match Card -->
+  <div class="match-card">
+    <div class="match-id">Match ID: NA1_1234567890</div>
+    <div class="players">
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Ahri.png"
+          alt="Ahri">
+        <span>Summoner1</span>
+      </div>
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png"
+          alt="Yasuo">
+        <span>Summoner2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Match Cards -->
+  <a href="./match-details.html">
+    <div class="match-card">
+      <div class="match-id">Match ID: NA1_1234567891</div>
+      <div class="players">
+        <div class="player">
+          <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Jinx.png"
+            alt="Jinx">
+          <span>Summoner3</span>
+        </div>
+        <div class="player">
+          <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Garen.png"
+            alt="Garen">
+          <span>Summoner4</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <div class="match-card">
+    <div class="match-id">Match ID: NA1_1234567892</div>
+    <div class="players">
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png" alt="Lux">
+        <span>Summoner5</span>
+      </div>
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Thresh.png"
+          alt="Thresh">
+        <span>Summoner6</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="match-card">
+    <div class="match-id">Match ID: NA1_1234567893</div>
+    <div class="players">
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Ezreal.png"
+          alt="Ezreal">
+        <span>Summoner7</span>
+      </div>
+      <div class="player">
+        <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Morgana.png"
+          alt="Morgana">
+        <span>Summoner8</span>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    async function loadMatchHistoryForSummoner(name) {
+      try {
+        const summonerRes = await fetch(`http://localhost:3000/api/summoner/${name}`);
+        const summonerData = await summonerRes.json();
+
+        const matchRes = await fetch(`http://localhost:3000/api/matches/${summonerData.puuid}`);
+        const matchHistory = await matchRes.json();
+
+        const container = document.getElementById('match-history-container');
+        container.innerHTML = matchHistory.map(createMatchCard).join('');
+      } catch (err) {
+        console.error('Error loading match history:', err);
+      }
+    }
+
+
+    function loadMatchHistory() {
+      const name = document.getElementById('summonerInput').value;
+      if (name) loadMatchHistoryForSummoner(name);
+    }
+  </script>
+</body>
+
+</html>
