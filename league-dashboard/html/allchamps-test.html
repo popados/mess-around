@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>League of Legends Champions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 12px;
+    }
+
+    .champion-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .champion-title {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <header style="display: flex;flex-direction: column;">
+    <div>
+      <h1>🌌 League Dashboard</h1>
+    </div>
+    <nav>
+      <a href="../index.html">🏠 Home</a>
+      <a href="./allchamps.html">🛡️ Champions</a>
+      <a href="./players.html">🧑 Players</a>
+      <a href="./game.html">🎮 Games</a>
+      <a href="./match-history.html">📚 Match List</a>
+      <a href="./allchamps-test.html">⚙️ All Champs Test Page</a>
+      <a href="./settings.html">⚙️ Settings</a>
+    </nav>
+  </header>
+
+
+
+  <h1>League of Legends Champions</h1>
+  <div class="grid" id="championGrid"></div>
+
+
+  <script>
+    async function loadChampions() {
+      const version = "14.10.1"; // Update to latest patch as needed
+      const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`);
+      const data = await response.json();
+      const champions = Object.values(data.data);
+
+      const grid = document.getElementById("championGrid");
+      champions.forEach(champ => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const link = document.createElement("a")
+        link.href = `./champ.html?champ=${champ.name}`;
+        link.style.textDecoration = "none";
+        link.innerHTML = `<div class="champion-name">${champ.name}</div>`
+        link.style.color = "inherit";
+
+        card.appendChild(link)
+        // link.value = ""
+
+        const img = document.createElement("img");
+        img.src = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champ.image.full}`;
+        img.alt = champ.name;
+
+        const content = document.createElement("div");
+        content.className = "card-content";
+        content.innerHTML = `
+          <div class="champion-name">${champ.name}</div>
+          <div class="champion-title">${champ.title}</div>
+        `;
+
+        card.appendChild(img);
+        card.appendChild(content);
+        grid.appendChild(card);
+        card.appendChild(link);
+      });
+    }
+
+    loadChampions();
+  </script>
+</body>
+
+</html>
