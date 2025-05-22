@@ -77,20 +77,21 @@
     .players {
       /* display: flex;
       flex-wrap: wrap; */
-      gap: 10px;
+      gap: 8px;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
     }
 
     .player {
       background: #2c2c2c;
-      padding: 16px;
+      padding: 8px;
       border-radius: 5px;
+      width: 350px;
     }
 
     .player-card {
       gap: 16px;
-
+      width: 350px;
       transform: scale(1);
       transition: transform 0.2s ease;
       will-change: transform;
@@ -164,26 +165,31 @@
         } */
 
     .player-card-container {
-      display: block;
+      /* display: block; */
       border: 1px solid antiquewhite;
+
       padding: 24px;
       gap: 16px
     }
 
     .player-container {
-      display: grid;
+      display: flex;
+      /* flex-direction: column; */
+      justify-content: center;
+      align-items: center;
       /* flex-wrap: wrap; */
-      gap: 32px;
+      gap: 16px;
+      margin: 8px;
       padding: 24px;
-      grid-auto-rows: minmax(100px, auto);
+      /* grid-auto-rows: minmax(100px, auto); */
       /* grid-auto-columns: repeat(5, 200px); */
 
       /* grid-template-columns: minxmax(1fr 1fr, auto); */
       /* grid-template-areas:
         card card card
         card card; */
-      grid-auto-columns: 250px;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      /* grid-auto-columns: 250px;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 
     }
 
@@ -217,12 +223,33 @@
 
     .team-100 {
       border-left: #4422ff solid 8px;
-      height: auto;
+      /* height: auto; */
+      margin: 4px;
     }
 
     .team-200 {
       border-left: #f44336 8px solid;
+      margin: 4px;
     }
+
+    #match-id-card {
+      display: flex;
+      flex-direction: column;
+      border: 5px solid #0f0f0f;
+      margin-bottom: 4px;
+    }
+
+    @media (min-width: 1048px) {
+      #match-id-card {
+        flex-direction: column;
+      }
+
+      .player-card {
+        flex-direction: column;
+      }
+
+    }
+
 
     /* .match-id-card{} */
   </style>
@@ -289,18 +316,27 @@
       const container = document.getElementById("match-id-card");
 
       const playerContainer = document.createElement("div");
+      const team100 = document.createElement("div");
+      const team200 = document.createElement("div");
       playerContainer.classList.add("player-container");
+      team100.classList.add("team-100-container");
+      team200.classList.add("team-200-container");
       container.appendChild(playerContainer);
+      playerContainer.appendChild(team100)
+      playerContainer.appendChild(team200)
+
 
       for (let i = 0; i < dataGame.participants.length; i++) {
         const participant = dataGame.participants[i];
 
-        const playerCard = document.createElement("div");
-        playerCard.classList.add("player-card", `team-${participant.teamId}`);
+        // const playerCard = document.createElement("div");
+        // playerCard.classList.add("player-card", `team-${participant.teamId}`);
 
         const player = document.createElement("div");
-        player.classList.add("player");
+        player.classList.add("player", `team-${participant.teamId}`);
         player.id = participant.championName;
+        playerContainer.appendChild(team100)
+        playerContainer.appendChild(team200)
 
         player.innerHTML = `
       <p>Riot Name:</p>
@@ -315,8 +351,14 @@
       </div>
     `;
 
-        playerCard.appendChild(player);
-        playerContainer.appendChild(playerCard);
+        // playerCard.appendChild(player);
+        playerContainer.appendChild(player);
+        if (participant.teamId === 100) {
+          team100.appendChild(player)
+
+        } else {
+          team200.appendChild(player)
+        }
       }
 
       return data;
@@ -498,7 +540,7 @@
         //     </div>
 
         //   `;
-        const match_card = document.createAttribute("div")
+        // const match_card = document.createAttribute("div")
         // container.appendChild(match_card)
         container.innerHTML +=
           `
@@ -520,44 +562,44 @@
 
     }
 
-    function createMatchCard(match) {
-      const team100 = match.info.participants.filter(p => p.teamId === 100);
-      const team200 = match.info.participants.filter(p => p.teamId === 200);
-      const team100Won = team100[0].win;
+    // function createMatchCard(match) {
+    //   const team100 = match.info.participants.filter(p => p.teamId === 100);
+    //   const team200 = match.info.participants.filter(p => p.teamId === 200);
+    //   const team100Won = team100[0].win;
 
-      return `
-        <div class="match-card">
-          <div class="match-id">${match.metadata.matchId}</div>
-          <div style="margin-bottom: 10px; color: ${team100Won ? '#4caf50' : '#f44336'}">
-            Winner: Team ${team100Won ? 'Blue (100)' : 'Red (200)'}
-          </div>
-          <div style="width: 100%;">
-            <strong style="color: #4fc3f7">Team 100</strong>
-            <div class="players">
-              ${team100.map(p => `
-                <div class="player">
-                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
-                  <span>${p.summonerName}</span>
-                </div>`).join('')}
-            </div>
-          </div>
-          <div style="width: 100%; margin-top: 10px;">
-            <strong style="color: #e57373">Team 200</strong>
-            <div class="players">
-              ${team200.map(p => `
-                <div class="player">
-                  <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
-                  <span>${p.summonerName}</span>
-                </div>`).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    }
+    //   return `
+    //     <div class="match-card">
+    //       <div class="match-id">${match.metadata.matchId}</div>
+    //       <div style="margin-bottom: 10px; color: ${team100Won ? '#4caf50' : '#f44336'}">
+    //         Winner: Team ${team100Won ? 'Blue (100)' : 'Red (200)'}
+    //       </div>
+    //       <div style="width: 100%;">
+    //         <strong style="color: #4fc3f7">Team 100</strong>
+    //         <div class="players">
+    //           ${team100.map(p => `
+    //             <div class="player">
+    //               <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+    //               <span>${p.summonerName}</span>
+    //             </div>`).join('')}
+    //         </div>
+    //       </div>
+    //       <div style="width: 100%; margin-top: 10px;">
+    //         <strong style="color: #e57373">Team 200</strong>
+    //         <div class="players">
+    //           ${team200.map(p => `
+    //             <div class="player">
+    //               <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+    //               <span>${p.summonerName}</span>
+    //             </div>`).join('')}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   `;
+    // }
 
-    // loadSummonerProfile("MockSummoner");
-    // loadMatchHistory();
-    loadPlayerProfile()
+    // // loadSummonerProfile("MockSummoner");
+    // // loadMatchHistory();
+    // loadPlayerProfile()
   </script>
 </body>
 

@@ -145,8 +145,11 @@
     }
 
     .game-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      /* display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
       gap: 1.5rem;
       margin-top: 1rem;
     }
@@ -327,7 +330,7 @@
       <a href="/html/allchamps.html">🛡️ Champions</a>
       <a href="/html/players.html">🧑 Players</a>
       <a href="/html/game.html">🎮 Games</a>
-      <a href="/html/match-history.html">📚 Match List</a>
+      <a href="/html/match-history/match-history.html">📚 Match List</a>
       <a href="/html/settings.html">⚙️ Settings</a>
     </nav>
   </header>
