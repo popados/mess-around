@@ -1,6 +1,6 @@
 import { DATA } from "./07-harry-potter/07-harry-potter.js";
 
-const word = ["the", "an", "a", "of", "than"];
+const word = ["the", "an", "a", "of", "than", "harry", "potter", "voldemort"];
 
 class WordCounter {
   constructor(text) {
