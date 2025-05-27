@@ -1,0 +1,5 @@
+{
+  "main": "./script.js",
+  "name": "harry-potter-book",
+  "type": "module"
+}

@@ -1,6 +1,6 @@
 let CONFIG = [
   {
-    keyAPI: "api_key=RGAPI-025e4c7c-e497-4a8e-ab37-7e5a29bab3a6",
+    keyAPI: "api_key=RGAPI-cf51d941-191e-4cc6-b2ea-2f254f844b0e",
     URI: "https://na1.api.riotgames.com/lol/",
     URI_AMERICAS: "https://americas.api.riotgames.com/lol/",
     URL_RANK: "league/v4/entries/RANKED_SOLO_5x5/IRON/IV?page=1&",

@@ -1,0 +1,200 @@
+
+    // const playerCard = document.createElement("div");
+    // playerCard.classList.add("player-card", `team-${participant.teamId}`);
+    // playerCard.appendChild(player);
+    // function summonerProfile(puuid) {
+    //   loadSummonerPuuid(puuid)
+    // }
+
+    // async function loadMatchData(name, match) {
+    //   const response = await fetch(`http://localhost:3000/api/summoner/matches/match/${match}/${name}`);
+    //   const data = await response.json();
+    //   console.log(data)
+    //   const dataGame = data.info
+    //   const team100 = data.info.participants.filter(p => p.teamId === 100);
+    //   const team200 = data.info.participants.filter(p => p.teamId === 200);
+    //   console.log(team100)
+
+    //   // const team100Won = team100[i].win;
+    //   const container = document.getElementById('match-id-card');
+    //   let playerContainer = document.createElement(`div`, container)
+    //   playerContainer.classList.add("player-container")
+    //   playerContainer.id = "player-container"
+
+    //   // playerContainer.setAttribute("class", "player-container")
+    //   for (i = 0; i < dataGame.participants.length; i++) {
+    //     // const container = document.getElementById("player-container")
+    //     // container.appendChild(playerContainer)
+
+    //     let matchHTML = `<div class="player-card team-${dataGame.participants[i].teamId == 100 ? 100 : 200}">
+    //       <div class="player" id="${dataGame.championName}">
+    //         <p>Riot Name:</p>
+    //         <p>${data.info.participants[i].riotIdGameName}#${data.info.participants[i].riotIdTagline}</p>
+    //         <p style="color: ${dataGame.participants[i].teamId == 100 ? '#4422ff' : '#f44336'}">Match: ${dataGame.participants[i].teamId}</p>
+    //         <p>Champion: ${data.info.participants[i].championName}</p>
+    //         <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${data.info.participants[i].championName}.png" alt="Champ-Icon">
+    //         <div style="display:flex; flex-direction:column;">
+    //           <p>KIlls: ${data.info.participants[i].kills} </p>
+    //           <p>Deaths: ${data.info.participants[i].deaths} </p>
+    //           <p>Assists: ${data.info.participants[i].assists} </p>
+    //           </div>
+    //           </div>
+    //           </div> `
+    //     playerContainer.appendChild(matchHTML)
+    //     // document.getElementById('player-container').innerHTML = matchText
+    //   }
+    //   return data;
+    // }
+
+    // async function loadMatchData(name, match) {
+    // try {
+    //   const response = await fetch(`http://localhost:3000/api/summoner/matches/match/${match}/${name}`);
+    //   const data = await response.json();
+    //   const participants = data.info.participants;
+
+    //   console.log(data);
+
+    //   const container = document.getElementById('match-id-card');
+    //   container.innerHTML = ''; // Clear previous match data if any
+
+    //   for (i = 0; i < participants.length; i++) {
+    //     const playerContainer = document.createElement("div");
+    //     playerContainer.classList.add("player-container");
+
+    //     participants.forEach(participant => {
+    //       const {
+    //         riotIdGameName,
+    //         riotIdTagline,
+    //         teamId,
+    //         championName,
+    //         kills,
+    //         deaths,
+    //         assists
+    //       } = participant;
+
+    //       const playerCard = document.createElement("div");
+    //       playerCard.className = `player-card team-${teamId}`;
+
+    //       playerCard.innerHTML = `
+    //     <div class="player">
+    //       <p>Riot Name:</p>
+    //       <p>${riotIdGameName}#${riotIdTagline}</p>
+    //       <p style="color: ${teamId === 100 ? '#4422ff' : '#f44336'}">Match: ${teamId}</p>
+    //       <p>Champion: ${championName}</p>
+    //       <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${championName}.png" alt="Champ-Icon">
+    //       <div style="display:flex; flex-direction:column;">
+    //         <p>Kills: ${kills}</p>
+    //         <p>Deaths: ${deaths}</p>
+    //         <p>Assists: ${assists}</p>
+    //       </div>
+    //     </div>
+    //   `;
+
+    //       playerContainer.appendChild(playerCard);
+    //     });
+    //   }
+
+    //   container.appendChild(playerContainer);
+    //   return data;
+
+    // } catch (error) {
+    //   console.error("Failed to load match data:", error);
+    // }
+    // }
+
+
+    // const tag = document.getElementById('summonerTag').value
+    // loadSummonerPuuid(name, tag)
+
+    // <div><strong>Top Champions:</strong></div>
+    // <div><strong>Title:</strong> The Prodigy</div>
+    // const name = document.getElementById('summonerInput').value;
+    // <div class="top-champions">
+    //   <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Yasuo.png" alt="Yasuo">
+    //   <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Zed.png" alt="Zed">
+    //   <img class="champion-icon-small" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/Lux.png" alt="Lux">
+    // </div>
+
+    // let puuid = loadPlayerProfile();
+
+
+    // const mockMatchHistory = [
+    //   {
+    //     metadata: { matchId: "NA1_1234567890" },
+    //     info: {
+    //       participants: [
+    //         { summonerName: "Player1", championName: "Ahri", teamId: 100, win: true },
+    //         { summonerName: "Player2", championName: "Yasuo", teamId: 100, win: true },
+    //         { summonerName: "Player3", championName: "Lux", teamId: 100, win: true },
+    //         { summonerName: "Player4", championName: "Jinx", teamId: 100, win: true },
+    //         { summonerName: "Player5", championName: "Ezreal", teamId: 100, win: true },
+    //         { summonerName: "Player6", championName: "Garen", teamId: 200, win: false },
+    //         { summonerName: "Player7", championName: "Morgana", teamId: 200, win: false },
+    //         { summonerName: "Player8", championName: "Zed", teamId: 200, win: false },
+    //         { summonerName: "Player9", championName: "Thresh", teamId: 200, win: false },
+    //         { summonerName: "Player10", championName: "Annie", teamId: 200, win: false }
+    //       ]
+    //     }
+    //   }
+    // ];
+    // container document.getElementById('match-history-container').data.map(createMatchList).join('');
+
+
+
+    //   const profileHTML = `
+ 
+    //     <div>
+    //       <p>Match: ${data[i]}</p>
+    //     </div>
+
+    //   `;
+    // const match_card = document.createAttribute("div")
+    // container.appendChild(match_card)
+    // return container
+
+    // container.innerHTML = data.map(createMatchList).join('');
+    // function createMatchCard(match) {
+    //   const team100 = match.info.participants.filter(p => p.teamId === 100);
+    //   const team200 = match.info.participants.filter(p => p.teamId === 200);
+    //   const team100Won = team100[0].win;
+
+    //   return `
+    //     <div class="match-card">
+    //       <div class="match-id">${match.metadata.matchId}</div>
+    //       <div style="margin-bottom: 10px; color: ${team100Won ? '#4caf50' : '#f44336'}">
+    //         Winner: Team ${team100Won ? 'Blue (100)' : 'Red (200)'}
+    //       </div>
+    //       <div style="width: 100%;">
+    //         <strong style="color: #4fc3f7">Team 100</strong>
+    //         <div class="players">
+    //           ${team100.map(p => `
+    //             <div class="player">
+    //               <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+    //               <span>${p.summonerName}</span>
+    //             </div>`).join('')}
+    //         </div>
+    //       </div>
+    //       <div style="width: 100%; margin-top: 10px;">
+    //         <strong style="color: #e57373">Team 200</strong>
+    //         <div class="players">
+    //           ${team200.map(p => `
+    //             <div class="player">
+    //               <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.9.1/img/champion/${p.championName}.png" alt="${p.championName}">
+    //               <span>${p.summonerName}</span>
+    //             </div>`).join('')}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   `;
+    // }
+
+    // // loadSummonerProfile("MockSummoner");
+    // // loadMatchHistory();
+    // loadPlayerProfile()
+    
+
+    <!-- <div id="match-data-container"></div> -->
+    <!-- <div id="player-container"></div> -->
+    // let nameReplace = name.replace(/#/g, "/")
+    // console.log(matches)
+    // console.log(nameReplace)

@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #1e0b3f, #2e144e);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.status-bar {
+  background: #151515;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
+}
+
+.screen-title {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px 20px 10px;
+}
+
+.music-screen {
+  flex: 1;
+  display: flex;
+  padding: 0 20px 20px;
+  gap: 20px;
+}
+
+.left-panel,
+.middle-panel,
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.album-item {
+  background: #3a3a3a;
+  border-radius: 12px;
+  aspect-ratio: 1;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s;
+}
+
+.album-item:hover {
+  transform: scale(1.05);
+}
+
+.music-section {
+  background: #4a4a4a;
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s;
+}
+
+.music-section:hover {
+  background: #5c5c5c;
+}
+
+.music-section.large {
+  flex: 2;
+}
+
+.nav-bar {
+  background: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-top: 1px solid #333;
+}
+
+.main-nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.main-nav button:hover {
+  transform: scale(1.2);
+}
+
+.main-nav button.active {
+  color: #a0e0ff;
+  text-shadow: 0 0 10px #a0e0ff;
+}
+
+.ac-control,
+.fan-control {
+  font-weight: bold;
+}
